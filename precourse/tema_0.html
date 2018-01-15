@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+		<title>Template</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+</head>
+<body>
+<script type="text/javascript">
+// a) Declara tu nombre y muéstralo por consola
+
+	var name = 'Pepe';
+	return console.log(name);
+
+// b) Declara tu edad y muéstralo por consola:
+
+	var age = 120;
+	console.log(age);
+
+// c) Declara tu nombre, tu apellido y tu edad en un array en diferentes posiciones y muéstrala por consola:
+
+	var info = [name,'García',age];
+	console.log(info);
+
+// d) Declara tu nombre y tu edad dentro de un objeto y muéstralo por consola:
+
+	var data = { name: name, age: age};
+	console.log(data);
+
+// e) Ahora utiliza el array que has creado anteriormente para recorrerlo y mostrar una a una todas las posiciones del array.
+
+	for(var i=0;data.length-1;i++){
+		console.log(info[i]);
+	}
+
+// f) Crea una estructura condicional que imprima el número mayor entre dos números.
+
+	var a = 25
+	var b = 12
+	if( a < b) {
+		console.log(b);
+	} else {
+		console.log(a);
+	}
+
+// f1) Crea otra condicion else if para contemplar la posibilidad de que los dos números sean iguales:
+
+	var c = 12
+	var d = 12
+	if( c < d) {
+		console.log(d);
+	} else if (c==d) {
+		console.log("The numbers are equal");
+	}
+	else {
+		console.log(c);
+	}
+
+// g) Crea una array de 5 numeros, y recorrela, mostrando además un mensaje cuando, esté a la mitad, muestre un mensaje 'We are in the middle of loop'.
+	
+	var array5 = [87,56,12,46,97];
+	for (var i = 0;i < array5.length-1;i++) {
+	    if (i == Math.ceil(array5.length/2)) {
+	    	console.log(i+" We are in the middle of loop");
+	    }
+	}
+
+// g1) Declara tu nombre y tu edad dos variables y crea un condicional para, en caso de no coincidir con tus datos, mostrar un error
+// Hint: https://www.w3schools.com/js/js_comparisons.asp (Logical Operators section)
+
+	var myName = 'Alex';
+	var myAge = 25;
+	if ((myName === name) && (myAge === age)) {
+		console.log("Hi!! Glad to see u again!");
+	} else {
+		console.log("this is not you!");
+	}
+
+// g2) Crea una array, introduce los datos anteriores y unos cuantos más de forma que al recorrer el array, muestre un mensaje cuando encuentre tus datos.
+
+	var myArray = [78,'LOL',"98",89,"Manu","Hola",965];
+	for (var i=0;i < myArray.length-1;i++) {
+		if (myArray[i] === myName || myArray[i] === myAge) {
+			console.log("We found something");
+		}
+	}
+
+</script>
+</body>
+</html>

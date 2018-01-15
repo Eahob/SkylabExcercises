@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<title>Tema 1 Arrays</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+	</head>
+<body>
+<script type="text/javascript">
+//Arrays
+
+//a) Declara tu nombre completo en una array y muéstralo por pantalla separando cada letra por "/"
+
+	var myName = 'JoseCampo'.split('');
+	console.log(myName.join('/'));
+
+//b) Ahora solo selecciona tu apellido y muestra cada letra separada por "|"
+
+	console.log('Campo'.split('').join('|'));
+
+//c) Ahora muestra cada letra de tu nombre con su posición (necesitarás un bucle for)
+
+	var myName = 'Jose'.split('');
+	var myName1 = [];
+	for (var i = 0; i < myName.length; i++) {
+		myName1[i] = myName[i]+' '+(i+1)+'º';
+	}
+	console.log(myName1.join(', ').toUpperCase());
+
+//d)Como en el ejercicio anterior, pero seleccionando tu apellido
+
+	var myLastName = 'Campo'.split('');
+	var myLastName1 = [];
+	for (var i = 0; i < myLastName.length; i++) {
+		myLastName1[i] = myLastName[i] +' '+(i+1)+'º';
+	}
+	console.log(myLastName1.join(', ').toUpperCase());
+
+//e) Puedes indicarme las iniciales de tu nombre y apellido? Como en el ejercicio h de la sección de strings
+
+	var myInitials = [myName[0], myLastName[0]];
+	console.log(myInitials.join('.'));
+
+//f) Ahora, reformula la array, introduciendo tu nombre en primera posición, tu apellido en segunda, y además añade en otra posicion tu edad. Muestra por pantalla solo tu nombre y tu edad en un solo mensaje.
+
+	var myInfo = ['Jose','Campo',78];
+	var mySelector = "My name is "+ myInfo[0] + " and i'm " + myInfo[2] + " years old";
+	console.log(mySelector);
+
+//g) Prepara una función para añadir tu City a la array, muestra un mensaje mostrando el contenido de toda la array, así aseguraremos los cambios.
+
+	function myCityAdd () {
+		myInfo.push('Mordor');
+		console.log('City added to array! => ' + myInfo.join(', '));
+	};
+	myCityAdd();
+
+//h) Crea ahora, una funcion para eliminar la variable City y asegura los cambios.
+
+	function myCityDelete () {
+		myInfo.pop();
+		console.log('City deleted! => ' + myInfo.join(', '));
+	};
+	myCityDelete();
+
+//j) Ahora, elimina el nombre y asegura los cambios.
+
+	function myNameDelete () {
+		myInfo.shift();
+		console.log('Name deleted! => ' + myInfo.join(', '));
+	};
+	myNameDelete();
+
+//k) Quiero volver a introducir mi nombre pero si lo introduzco utilizando push() estará en la última posición, como podria hacer para introducirlo en la primera posición?
+
+	function myNameAdd () {
+		myInfo.unshift('Jose');
+		console.log('Name added to array! => ' + myInfo.join(', '));
+	};
+	myNameAdd();
+
+//l) Ahora, declara una array con los números del 0 a 10 y muestra cada número multiplicado por dos.
+
+	var numbers = [1,2,3,4,5,6,7,8,9,10];
+	function timesTwo(e) {
+		return e*2;
+	};
+	var multByTwo = numbers.map(timesTwo);
+	console.log(multByTwo);
+
+//l1) Reformula la función para que puedas especificar por cual número debería multiplicar cada elemento de la array.
+
+	var num = 3; // cada número se multiplicará por 3
+	function multByNum(e) {
+		return e*num;
+	};
+	var arrayMult = numbers.map(multByNum);
+	console.log(arrayMult);
+
+//m) Podrías mostrarlos en el orden inverso?
+
+	console.log(numbers.reverse());
+
+//n) Puedes indicarme que letras se repiten de tu nombre y cuantas veces?
+
+	var myName = myInfo.splice(2).join('');
+	var repeatLetters = myInfo[0]+' '+myInfo[1]+', ';
+	var myNameRepeat =[];
+	var countTotal = 0;
+	for (var i = 0; i < myName.length; i++) {
+		for (var j = 0; j < myName.length; j++) {
+			var count = 0;
+			if (myName[i]===myName[j] && i!=j) {
+				count += 1;
+			}
+		}
+		if (count!=0) {
+			repeatLetters +=  "the letter '" + myName[i].toUpperCase() + "' => " + count +' times.';
+		}
+		countTotal += count;
+		myNameRepeat[i] = count;
+	}
+	if (countTotal==0){
+		repeatLetters += 'no letters repeat.';
+	}
+
+	console.log(repeatLetters);
+
+//n1) Ahora muestra por consola que letras NO se repiten y muestra tu nombre sin esas letras
+
+	var repeatLetters = myInfo[0]+' '+myInfo[1]+', ';
+	function checkGT0 (e) {
+		return e > 0;
+	}
+	if (myNameRepeat.every(checkGT0)) {
+		repeatLetters += 'all letters repeat.';
+	} else {
+		repeatLetters += 'the letters => ';
+		for (var i = 0; i < myNameRepeat.length; i++) {
+			if (myNameRepeat[i] == 0) {
+				repeatLetters += myName[i]+', ';
+			}
+		}
+		repeatLetters += 'are not repeated,';
+	}
+	console.log(repeatLetters) // Tony Stark, the letters => o, n, y, s, a, r, k are not repeated, the name is => Ony Sark
+</script>
+</body>
+</html>

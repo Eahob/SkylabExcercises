@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+		<title>Tema 1 Project</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+</head>
+<body>
+<script type="text/javascript">
+
+// Haz una calculadora. Un único programa al que le pasarás dos parámetros y el usuario
+// podrá visualizar por consola la suma, resta, multiplicación y división entre ambos
+// números. El resultado debería ser mostrado con 3 decimales como mucho (En caso de que
+// hubieran). El programa debe contemplar y actuar correctamente en el caso de que el
+// usuario introduzca cualquier cosa que no sean números.
+//    - Si el usuario introduce un solo numero, deberá mostrar SOLO su raíz cuadrada, si
+//      vuelve a introducir los dos, volverá a mostrar las 4 operaciones de siempre.
+//    - Los resultados deberían almacenarse dentro de una array y mostrarlos de una forma
+//      amigable al usuario.
+// PRO: Podrías hacer que le calculadora relizara operaciones sean cuales sean el número
+//      de argumentos pasados a la funcion?
+//      Después de hacer todas las operaciones, el programa deberá preguntar al usuario si
+//      desea volver a realizar otra operación, volviendo a almacenar más resultados y mostrándolos.
+
+function decimals3 () {
+	if (arguments[0]-Math.floor(arguments[0])==0) {
+		return arguments[0];
+	} else {
+		if (arguments[0] > 1) {
+			var a = Math.floor(arguments[0]).toString().length;
+		} else {
+			var a = 0;
+		}
+		var b = arguments[0].toString().length - a - 1;
+		if (b > 3) {
+			b = 3
+		}
+		return arguments[0].toPrecision(a+b);
+	}
+}
+
+function Calculator () {
+	var a = Number(arguments[0]);
+	var b = Number(arguments[1]);
+	var results = '';
+	if (isNaN(a)) {
+		results = 'You did not introduce any valid data.';
+	} else if (isNaN(b)) {
+		results = 'The square root of '+a+' is '+ decimals3(Math.sqrt(a));
+	} else {
+		var sum = decimals3(a+b);
+		var res = decimals3(a-b);
+		var mul = decimals3(a*b);
+		var div = decimals3(a/b);
+		results = 'The sum, rest, product and division of '+decimals3(a)+' and '+decimals3(b)+' is '+sum+', '+res+', '+mul+' and '+div+'.';
+	}
+	return results;
+}
+
+//console.log(Calculator());
+function CalculatorPRO () {
+	var messege = '';
+	var num = [];
+	var result = [];
+	var valid = true;
+	for (var i = 0; i < arguments.length; i++) {
+		num[i] = Number(arguments[i]);
+		if (isNaN(num[i])) {
+			messege += arguments[i]+' ';
+			valid = false;
+		}
+	}
+	if (valid && arguments.length==1) {
+		messege = 'The square root of '+num[0]+' is '+ decimals3(Math.sqrt(num[0]));
+	}else if (valid) {
+		var sum = 0;
+		var mul = 1;
+		for (var i = 0; i < num.length; i++) {
+			sum += num[i];
+			mul *= num[i];
+		}
+		var res = num[0];
+		var div = num[0];
+		for (var i = 1; i < num.length; i++) {
+			res -= num[i];
+			div /= num[i];
+		}
+		result = [decimals3(sum),decimals3(res),decimals3(mul),decimals3(div)];
+		messege = 'The sum, rest, product and division is: '
+	} else {
+		messege = 'You introduced invalid data: '+messege;
+	}
+	return messege + result.join(', ');
+}
+
+</script>
+</body>
+</html>

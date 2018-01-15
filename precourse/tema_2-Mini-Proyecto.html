@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+		<title>Tema 2 Project</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+</head>
+<body>
+<script type="text/javascript">
+/* Skylab Airlines!
+
+Programa una inferfaz de usuario para una aerolinea (por terminal...). Esta aerolinea dispondrá de 10 vuelos para el dia de hoy, para empezar, estos vuelos estarán declarados de manera global, cuando se llame a la función:
+
+    - Se preguntará por el nombre de usuario y dará la bienvenida.
+    - El usuario visualizará todos los vuelos disponibles de una forma amigable: El vuelo con origen: Barcelona, y destino: Madrid tiene un coste de XXXX€ y no realiza ninguna escala.
+    - A continuación, el usuario verá el coste medio de los vuelos.
+    - También podrá ver cuantos vuelos efectúan escalas.
+    - Y, sabiendo que los ultimos 5 vuelos (los últimos 5 ID's) son los últimos del día, muestra al usuario sus destinos.
+
+PRO!:
+
+Después de ver toda la información el programa pedirá al usuario si es ADMIN/USER, dependiendo de la elección, el programa se comportará de la siguiente manera:
+
+Si eres ADMIN, la función debería permitir:
+    - Poder crear, más vuelos, pidiendo la información por prompt(), sin poder pasar de 15 vuelos, si se intenta introducir uno más, saltará un alert().
+    - Poder eliminar vuelos mediante el ID.
+
+Si eres USER la función debería permitir:
+    Buscar por precio ( más alto, más bajo o igual), el usuario debería mostrar los datos de los vuelos encontrados y, indicando el ID, el programa responderá: "Gracias por su compra, vuelva pronto."
+ */
+
+var flights = [
+	{id: 0, to: "New York",from: "Barcelona", cost: 700, scale: false},
+	{id: 1, to: "Los Angeles", from: "Madrid", cost: 1100, scale: true},
+	{id: 2, to: "Paris", from: "Barcelona", cost: 210, scale: false},
+	{id: 3, to: "Roma", from: "Barcelona", cost: 150, scale: false},
+	{id: 4, to: "London", from: "Madrid", cost: 200, scale: false},
+	{id: 5, to: "Madrid", from: "Barcelona", cost: 90, scale: false},
+	{id: 6, to: "Tokyo", from: "Madrid", cost: 1500, scale: true},
+	{id: 7, to: "Shangai", from: "Barcelona", cost: 800, scale: true},
+	{id: 8, to: "Sydney", from: "Barcelona", cost: 150, scale: true},
+	{id: 9, to: "Tel-Aviv", from: "Madrid", cost: 150, scale: false}
+];
+
+function skylabAirlines() {
+	var name = prompt("Dinos cómo te llamas", "Tu nombre");
+	console.log("¡Hola "+name+"!");
+	function showFlightsInformation() {
+		var str = '';
+		var precioTotal = 0;
+		var escalaContador = 0;
+		for (var i = 0; i < flights.length; i++) {
+			precioTotal += flights[i].cost;
+			console.log("El vuelo con origen: "+flights[i].from+" y destino: "+flights[i].to+" tiene un precio de "+flights[i].cost+"€ y "+(flights[i].scale ? "realiza" : "no realiza ninguna")+" escala.");
+		};
+		console.log("El precio medio de los vuelos de hoy es de "+precioTotal/flights.length+"€.");
+		console.log("Hoy hay "+escalaContador+" vuelos que hacen escala.")
+		console.log("Los últimos vuelos del día tienen como destino:");
+		for (var i = flights.length-5; i < flights.length; i++) {
+			console.log("- "+flights[i].to);
+		};
+	};
+	showFlightsInformation();
+	var option = confirm("Pulsa Aceptar si eres admin");
+	if (option) {
+		var adminIn = true;
+		function NewFlight (to, from, cost, scale) {
+			this.to = to;
+			this.from = from;
+			this.cost = Number(cost);
+			this.scale = scale;
+			this.id = flights[flights.length-1].id+1;
+		};
+		while (adminIn) {
+			option = prompt("Introduce el número de opción que quires realizar:\n1) Eliminar vuelo\n2) Crear vuelo\n3) Salir");
+			switch (Number(option)) {
+				case 1:
+					var invalidId = true;
+					var di = -1;
+					while (invalidId){
+						di = Number(prompt("Introduce el ID del vuelo que quieres eliminar."));
+						for (var i = 0; i < flights.length; i++) {
+							if (flights[i].id===di) {
+								invalidId = false;
+								flights.splice(i, 1);
+								break;
+							};
+						};
+					};
+					showFlightsInformation();
+					break;
+				case 2:
+					if (flights.length < 15) {
+						var origen = prompt("Introduce los datos del vuelo: origen");
+						var destino = prompt("Introduce los datos del vuelo: destino");
+						var precio = prompt("Introduce los datos del vuelo: precio (solo número en €)");
+						var escala = prompt("Introduce los datos del vuelo: escala (true si tiene false si no)");
+						flights[flights.length] = new NewFlight (destino, origen, precio, escala);
+						showFlightsInformation();
+					} else {
+						alert("No puede haber más de 15 vuelos, elimina alguno antes.");
+					};
+					break;
+				default:
+					adminIn = false;
+					break;
+			};
+		};
+	} else {
+		option = prompt("Para buscar por precio introduce el número de opción:\n1) Más alto que\n2) Más bajo que\n3) Igual a\n4) Salir");
+		var mens1 = "Introduzca el ID del vuelo que desee comprar:";
+		var mens2 = "Gracias por su compra, vuelva pronto.";
+		var valor = prompt("Intruduzca su precio");
+		switch(Number(option)){
+			case 1:
+				var valor = prompt("Buscar vuelos de precio mayor que");
+				for (var i = 0; i < flights.length; i++) {
+					if (flights[i].cost > valor) {
+						console.log("Vuelo con origen: "+flights[i].from+" y destino: "+flights[i].to+(flights[i].scale ? "con" : "sin")+" escala. Precio: "+flights[i].cost+"€. ID: "+flights[i].id);
+					};
+				};
+				prompt(mens1);
+				alert(mens2);
+				break;
+			case 2:
+				var valor = prompt("Buscar vuelos de precio menor que");
+				for (var i = 0; i < flights.length; i++) {
+					if (flights[i].cost < valor) {
+						console.log("Vuelo con origen: "+flights[i].from+" y destino: "+flights[i].to+(flights[i].scale ? "con" : "sin")+" escala. Precio: "+flights[i].cost+"€. ID: "+flights[i].id);
+					};
+				};
+				prompt(mens1);
+				alert(mens2);
+				break;
+			case 3:
+				var valor = prompt("Buscar vuelos de precio igual a");
+				for (var i = 0; i < flights.length; i++) {
+					if (flights[i].cost==valor) {
+						console.log("Vuelo con origen: "+flights[i].from+" y destino: "+flights[i].to+(flights[i].scale ? "con" : "sin")+" escala. Precio: "+flights[i].cost+"€. ID: "+flights[i].id);
+					};
+				};
+				prompt(mens1);
+				alert(mens2);
+				break;
+			default:
+				alert("Gracias por su visita.")
+				break;
+		};
+	};
+};
+
+skylabAirlines();
+
+</script>
+</body>
+</html>

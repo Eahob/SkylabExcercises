@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<title>Calculaora Pro</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css">
+			body{
+				background-color: #ccc;
+				font-family: Arial;
+				/*font-size: 14pt;*/
+				text-align: right;
+			}
+			div#calculator {
+				margin: 30px auto;
+				background-color: #bbb;
+			}
+			div#calculator, div#histoty, div#input {
+				display: block;
+				width: 250px;
+			}
+			div#input {
+				padding-top: 5px;
+				height: 25px;
+				font-size: 20px;
+			}
+			div#input span {
+				margin-right: 20px;
+			}
+			div#history {
+				color:#777;
+			}
+			div#history pre{
+				font-family: Arial;
+				font-size: 20px;
+				margin: 5px 20px 0px;
+			}
+			div#numbers {
+				width: 150px;
+			}
+			div#operators {
+				width: 100px;
+			}
+			div#keys * {
+				float: left;
+			}
+			div#keys button {
+				width: 50px;
+				height: 50px;
+				font-size: 14pt;
+				background-color: #aaa;
+				border: none;
+				text-align: center;
+			}
+		</style>
+	</head>
+<body>
+<script type="text/javascript">
+	var number = '';
+	var results = '';
+
+	function showCurrentNumber() {
+		document.getElementById("input").childNodes[0].innerHTML= number;
+	};
+
+	function clickNumber(butt) {
+		number += butt.innerHTML;
+		showCurrentNumber();
+	};
+	function appendResult() {
+		var a;
+		try {
+			a = eval(number)+'\n';
+		}
+		catch(err) {
+			a = 'Math Error\n';// err.message;
+		}
+		results += a;
+		document.getElementById("history").childNodes[0].innerHTML=results;
+		number = '';
+		showCurrentNumber();
+	};
+</script>
+<div id="calculator">
+	<div id="history"><pre></pre></div>
+	<div id="input"><span></span></div>
+	<div id="keys">
+		<div id="numbers">
+			<button onclick="clickNumber(this)">7</button>
+			<button onclick="clickNumber(this)">8</button>
+			<button onclick="clickNumber(this)">9</button>
+			<button onclick="clickNumber(this)">4</button>
+			<button onclick="clickNumber(this)">5</button>
+			<button onclick="clickNumber(this)">6</button>
+			<button onclick="clickNumber(this)">1</button>
+			<button onclick="clickNumber(this)">2</button>
+			<button onclick="clickNumber(this)">3</button>
+			<button onclick="clickNumber(this)">0</button>
+			<button onclick="clickNumber(this)">.</button>
+			<button onclick="appendResult()">=</button>
+		</div>
+		<div id="operators">
+			<button onclick="clickNumber(this)">(</button>
+			<button onclick="clickNumber(this)">)</button>
+			<button onclick="clickNumber(this)">+</button>
+			<button onclick="clickNumber(this)">-</button>
+			<button onclick="clickNumber(this)">*</button>
+			<button onclick="clickNumber(this)">/</button>
+			<button onclick="number = number.slice(0, -1);showCurrentNumber()"><</button>
+			<button onclick="number = '';showCurrentNumber()">C</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

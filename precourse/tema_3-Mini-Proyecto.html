@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+		<title>Tema 3 Projecto</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+</head>
+<body>
+<script type="text/javascript">
+/* BINGO GAME!
+
+Realiza un programa que simule un Bingo. Cuando se ejecute, pedirá el nombre del jugador y deberá guardarse. Durante el primer turno se mostrará un cartón con 15 números (excluyendo el 0 siempre), para pasar al siguiente turno el usuario deberá confirmar mediante confirm() visualizándose otro número, si coincide con alguno de los existentes en el cartón, cambiará por una "X" o un 0. El cartón se mostrará, al final de cada turno, con los cambios efectuados, indicándole al usuario qué número se ha encontrado. El programa deberá preguntar al usuario al inicio de cada turno si desea continuar, en caso de que se continúe, seguirá el mismo patrón que hasta el momento.
+
+Por supuesto, cuando todos los números de una misma linea estén en "X", mostrará un mensaje "LINEA!", pero la ejecución seguirá, el juego solo acabará cuando todos los números estén a "X".
+
+Cuando el juego concluya, deberá decirle al usuario en cuantos turnos se ha completado el cartón. Por último, deberá preguntar si desea volver a jugar.
+
+Secuence:
+>>> bingo()
+<<< prompt('Tell me, who are you?')
+>>> Hello *name*, ready to play? This is your card:
+...
+<<< confirm('Next turn, you confirm?') // true / false
+>>> We find 1 match! This is the status of your card now:
+...
+...
+>>> Congrats! You finish the Bingo game in X turns! Do you want to play again?
+<<< confirm('Play again?') // true / false
+
+Pro
+
+    Cuando se muestre la carta, se preguntará al usuario si realmente quiere ese cartón o generar otro, si realmente quiere ese cartón, deberá responder "yes" para proceder
+    Establece un sistema de puntos, en cuantos más turnos se complete el cartón, menos puntos (el sistema de puntos intégralo como quieras), por el contrario, a menos turnos, más puntos.
+    Antes de empezar el juego, muestra el sistema de puntos al usuario.
+    Ranking de usuarios (ordenado por puntos).
+*/
+
+function bingo() {
+	function showBingoCard () {
+		var a = '';
+		for (var i = 0; i < bingoCard.length; i++) {
+			bingoCard[i].matched ? a+='X ' : a+=bingoCard[i].number+' ';
+			if ((i+1)%5 == 0) {a+="\n"};
+		};
+		return a;
+	};
+	function generateRandomArray(M,N){
+	// Generates an array of lenght M of random numbers from 1 to N whitout repeating numbers.
+		if (M > N) {
+			return [];
+		} else {
+			var a = [];
+			var b = [];
+			for (var i = 0; i < N; i++) {
+				a[i] = i+1;
+			};
+			for (var i = 0; i < M; i++) {
+				b[i]= Number(a.splice(Math.floor(Math.random()*(a.length)),1));
+			};
+			return b;
+		};
+	};
+	function isNotBingo(){
+		for (var i = 0; i < bingoCard.length; i++) {
+			if (!bingoCard[i].matched) {
+				return true;
+			};
+		};
+		return false;
+	};
+	function isThisNumberOnCard(num){
+		for (var i = 0; i < bingoCard.length; i++) {
+			if (bingoCard[i].number == num ) {
+				bingoCard[i].matched = true;
+				return true;
+			};
+		};
+		return false;
+	};
+	function isLine5by3 () {
+		var isLine;
+		for (var j = 0; j < 15; j+=5) { //check horizontal lines
+			isLine = true;
+			for (var i = j; i < (5+j); i++) {
+				if (!bingoCard[i].matched) {
+					isLine = false;
+					break;
+				};
+			};
+			if (isLine) {break;};
+		};
+		for (var j = 0; j < 5; j++) { //check vertical lines
+			isLine = true;
+			for (var i = j; i < 15; i+=5) {
+				if (!bingoCard[i].matched) {
+					isLine = false;
+					break;
+				};
+			};
+			if (isLine) {break;};
+		};
+		return isLine
+	};
+	var maxNumber = 50;
+	var bingoCardLength = 15;
+	var bingoCard = [];
+	var score = maxNumber;
+	var playerName = prompt("Enter player name:","Player");
+	if (!Boolean(playerName)) {playerName = "Llun"};
+	do {
+		var numberedBalls = generateRandomArray(maxNumber,maxNumber);
+		var ballCounter = 0;
+		var notCancelled = true;
+		var endMessege = '';
+		var notCalledLine = true;
+		do {
+			var randArr = generateRandomArray(bingoCardLength,maxNumber)
+			for (var i = 0; i < bingoCardLength; i++) {
+				bingoCard[i] = {number: randArr[i], matched: false};
+			};
+		} while (!confirm("Hello "+playerName+"! do you accept this card?\n"+showBingoCard()));
+		do {
+			var messege = 'The number is: '+numberedBalls[ballCounter];
+			if (isThisNumberOnCard(numberedBalls[ballCounter])) {
+				if (notCalledLine) {
+					if (isLine5by3()) {
+						messege += "\nLINE!"
+						notCalledLine=false;
+					};
+				};
+				messege += '\nWe have a match! This is your progress:\n'+showBingoCard();
+			} else {
+				messege += '\nNo luck this time.';
+			};
+			ballCounter +=1;
+			notCancelled = confirm(messege);
+		} while (isNotBingo() && notCancelled);
+		score -= ballCounter;
+		if (notCancelled) {
+			endMessege = "You won! You finished the game in "+ballCounter+" turns.";
+		} else {
+			endMessege = "You exited the game."
+		};
+		endMessege += "\nDo you want to play again?";
+	} while (confirm(endMessege));
+};
+
+</script>
+</body>
+</html>

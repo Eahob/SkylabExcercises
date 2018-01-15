@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+		<title>Tema 3</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+</head>
+<body>
+<script type="text/javascript">
+//a) Primero, creamos una función que nos cree un saludo, pasa tu nombre como parámetro y devuélvelo por la consola.
+
+	function tema3_exe_a (myName) {
+		console.log('Hello '+ myName+'.');
+	};
+	tema3_exe_a('Juan');
+
+//b) Intenta retornar los valores en lugar de usar console.log
+
+	function tema3_exe_b (myName) {
+		return 'Hello '+ myName+'.'; /
+	};
+	tema3_exe_b('Pepe');
+
+//c) Ahora, añade tu edad y concaténala al return
+
+	function tema3_exe_c (myName,myAge) {
+		return 'Hello '+ myName+', you are '+myAge+'years old.';
+	};
+	tema3_exe_c('Antonio',89);
+
+//d) Iguala tu función a una variable y ejecútala
+
+	var myFunctionVar = function (myName,myAge) {
+			return 'Hello '+ myName+', you are '+myAge+' years old.';
+		}; 
+	myFunctionVar('Manuel',779);
+
+//e) Ahora declara otra funcion que devuelva tu edad y asigna su resultado a otra variable, intenta imprimir sus dos resultados concatenados.
+
+	myName = function () {return 'Juanjo ';};
+	myAge = function () {return 92;};
+	console.log(myName() + myAge());
+
+//e1) Intenta sumarle al resultado de tu segunda funcion, un numero random del 0-10 y conviertelo todo a un solo string.
+
+	myRandomNumber = Math.floor((Math.random()*11));
+	console.log(myName() + (myAge() + myRandomNumber).toString());
+
+//f) Ahora, todas las variables deberían ser pasadas como parámetro a las funciones.
+
+	myName = function (e) {return e;};
+	myAge = function (e) {return e;};
+	console.log(myName('Fernando ') + myAge(29)) //output: IronMan 43
+
+//g) Intenta englobar todas las funciones en una sola funcion padre, el return de dicha función padre deberá ser la llamada a las funciones hijas
+
+	function tema3_exe_g () {
+		myName = function (e) {return e;};
+		myAge = function (e) {return e;};
+		var x = myName('Juan ');
+		var y = myAge(29);
+		return x + y;
+	};
+
+//h) Haz otra función hija que solo devuelva un número random, ese número random será el argumento que se pasará como parámetro a la función age()
+
+	function tema3_exe_h () {
+		myName = function (e) {return e;};
+		myAge = function (e) {return e;};
+		myRandom = function () {return Math.floor((Math.random()*10000);};
+		var x = myName('Pablo ');
+		var y = myAge(myRandom());
+		return x + y;
+	};
+	console.log(tema3_exe_h());
+
+//i) Ahora, limita el random de 0 a 50, Muestra un mensaje si el output age es < 20 y otro si es de 21 - 50
+
+	function tema3_exe_i () {
+		myName = function (e) {return e;};
+		myAge = function (e) {return e;};
+		myRandom = function () {return Math.floor((Math.random()*51);};
+		var x = myName('Hector ');
+		var y = myAge(myRandom());
+		return x + ( y<20 ? ' ...so young!' : ' ... sure, still young.');
+	};
+	console.log(tema3_exe_i());
+
+//j) Al return de la función name(), concaténale otro mensaje
+
+	function tema3_exe_j () {
+		myName = function (e) {return e+' :^) ';};
+		myAge = function (e) {return e;};
+		myRandom = function () {return Math.floor((Math.random()*51);};
+		var x = myName('Carlos');
+		var y = myAge(myRandom());
+		return x + ( y<20 ? ' ...so young!' : ' ... sure, still young.');
+	};
+	console.log(tema3_exe_j());
+
+//k) Ahora, modifica el return de la función padre para que devuelva sus datos en un mensaje amigable
+
+	function tema3_exe_k () {
+		myName = function (e) {return e+' :^) ';};
+		myAge = function (e) {return e;};
+		myRandom = function () {return Math.floor((Math.random()*51);};
+		var x = myName('Pepe');
+		var y = myAge(myRandom());
+		return 'The first function returns: '+x + ', The second function returns: '+( y<20 ? ' ...so young!' : ' ... sure, still young.');
+	};
+	console.log(tema3_exe_k());
+
+//l) Modifica la primera función y la función padre para, si el parámetro introducido no es tu nombre, no siga con la segunda llamada
+
+	function tema3_exe_l () {
+		myName = function (e) {return e;};
+		myAge = function (e) {return e;};
+		myRandom = function () {return Math.floor((Math.random()*51);};
+		var x = myName('Jose');
+		var y = myAge(myRandom());
+		return 'The first function returns: '+x + ', The second function returns: '+( y<20 ? ' ...so young!' : ' ... sure, still young.');
+	};
+	console.log(tema3_exe_l());
+
+//return x + y // output: "The first function returns: Hulk... You're not IRONMAN!"
+
+//m) Vamos a complicarlo un poco... El número random debería generarse en otra función separada del padre. Retorna a la funcion padre y concaténalo en el return padre.
+
+	function random0to50() {
+		return Math.floor((Math.random()*51);
+	};
+
+	function tema3_exe_m () {
+		myName = function (e) {return e;};
+		myAge = function (e) {return e;};
+		var myRandom = random0to50();
+		var x = myName('Jose');
+		var y = myAge(69);
+		return 'The first function returns: '+x + ', The second function returns: '+y+'. '+random0to50();;
+	}
+	console.log(tema3_exe_m());
+
+//n) Refactorizemos nuestro código dejando todas las funciones separadas del padre, éste último se encargará de llamarlas todas y mostrar sus resultados.
+
+	function myName () {
+		return 'Azni';
+	};
+	function myAge () {
+		return 21;
+	};
+	function tema3_exe_n () {
+		return 'The first function returns: '+myName() + ' , The second function returns: '+myAge()+'. La tercera: '+random0to50();
+	};
+	console.log(tema3_exe_n());
+
+
+//ñ) Intenta hacer push de todos los resultados de las funciones a una array declarada en el padre, muestra los resultados de esta array como siempre.
+
+	function tema3_exe_nn () {
+		var myArr = [];
+		myArr.push(myName(),myAge(),random0to50());
+		return myArr;
+	};
+	console.log(tema3_exe_nn());
+
+//o) Crea una funcion que llame a nuestra funcion father(), ésta, a parte de llamarla, deberá hacer otro push "hello from the dark side..." a la array que crea father(). Muestra toda la array completa.
+
+	function tema3_exe_o () {
+		return tema3_exe_nn().push("hello from the dark side...");
+	};
+	console.log(tema3_exe_o());
+
+//p) Llama a ésta nueva función dos veces, muestra sus resultados por pantalla y compara sus randomNums, mostrando un mensaje indicando cual es mayor. El nombre pasado por parámetro también deberá ser random entre una array de nombres, con lo cual, también deberás refactorizar las funciones hijas.
+
+function gandFather(){
+    var names = ['hulk', 'ironMan', '...']
+    var selectedName...
+    var selectedName2...
+    if(father(selectedName) > father(selectedName2))
+        ...
+    else
+        ...
+    return father(selectedName).push().join()...
+}
+
+//p1) En lugar de retornar los valores como una array, prepara tus funciones para que devuelvan los resultados como OBJECTS. Muestra por pantalla los objetos sin estilizar el output.
+
+//p2) Muestra los resultados de los OBJECTS recorriendolos y mostrando los valores de una forma amigable.
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<title>Tema 1 Numbers</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+	</head>
+<body>
+<script type="text/javascript">
+//Numbers
+
+//a) Que hora es? Declara la hora como número y devuelvela como String
+	
+	var myHour = 20.07;
+	var myString = myHour.toString();
+	console.log(myString);
+
+//b) Nono, que hora exactamente? Dime la hora sin minutos
+
+	var myString = Math.floor(myHour).toString();
+	console.log(myString);
+
+//c) Ahora, declara tu hora y muéstrala redondeada.
+
+ 	var myHour = 17.43;
+ 	var myString = Math.floor(myHour).toString();
+	console.log(myString);
+
+//d) Hagamos una calculadora. Primero, la suma.
+
+	var number1 = 8;
+	var number2 = 6;
+	var sum = number1 + number2;
+	console.log('The sum of '+number1+'+'+number2+' is '+ sum);
+
+//d1) Añade la resta...
+
+	var rest = number1-number2;
+	console.log('The sum and rest of '+number1+' and '+number2+' is '+sum+' and '+rest) 
+
+//d2) Y la multiplicación
+
+	var mult = number1*number2;
+	console.log('The sum, rest and product of '+number1+' and '+number2+' is '+sum+', '+rest+' and '+mult);
+
+//d3) Por ultimo, la división
+
+	var div = number1/number2;
+	console.log(sum +', ' +rest+', ' + mult+' and ' + div); // 10, 4, 21 and 2.3
+
+//d4) Ahora, intenta multiplicar un número por una string, que devuelve?
+
+	console.log(10*"hour");
+
+//e) Podemos controlar este error con un condicional if?
+
+	var res = 10*"hour";
+
+	if (isNaN(res)) {
+		console.log("You can't do this operation!")
+	}
+</script>
+</body>
+</html>

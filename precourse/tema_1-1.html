@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<title>Tema 1 Strings</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+	</head>
+<body>
+<script type="text/javascript">
+//Strings
+
+	var myName = 'Amparo';
+	var mySurname = 'Gurrera';
+
+//a) Puedes contar cuantas letras tiene tu nombre?
+
+	console.log(myName.length);
+
+//b) Añade tu apellido e indica en que posición se encuentra
+
+	var myString = myName + ' ' + mySurname; 
+	console.log(myString.indexOf(mySurname));
+
+//c) Ahora, con tu apellido y nombre en la misma variable, muestra solo el nombre.
+
+	console.log(myString.substr(myString.indexOf(myName),myName.length));
+
+//d) Ahora, solo tu apellido.
+
+	console.log(myString.substr(myString.indexOf(mySurname),mySurname.length));
+
+//d1) Iguala el resultado a una variable nueva e imprímela por pantalla.
+
+	var myNewString = myString.substr(myString.indexOf(mySurname),mySurname.length);
+	console.log(myString +", " + myNewString);
+
+//e) Ahora, reemplaza tu nombre por "Mr/Ms" y vuelve a mostrar la variable con los cambios.
+	
+	myNewString = myString.replace(myName, "Mr.");
+    console.log(myNewString);
+
+//f) Selecciona tu apellido y transfórmalo a MAYÚSCULAS.
+
+	var mySelection = myString.substr(myString.indexOf(mySurname),mySurname.length).toUpperCase();
+	console.log(mySelection);
+
+//g) Ahora declara una variable nueva e igualala a la anterior variable sumándole, además, un mensaje.
+
+	var something = myName + " is awesome";
+	console.log(something);
+
+//h) Ahora, puedes seleccionar la inicial de tu nombre y apellido y mostrarlas por pantalla?
+
+   console.log(myName[0]+'.'+mySurname[0]);
+
+</script>
+</body>
+</html>

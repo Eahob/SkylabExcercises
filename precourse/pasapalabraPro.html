@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pasapalabra Pro</title>
+		<meta charset="utf-8" />
+		<style type="text/css">
+		:root {
+			--circle-size: 40px;
+			--timer-size: calc(var(--circle-size)*1.35);
+			--corre-size: calc(var(--circle-size)*1.1);
+			font-family: Arial;
+			background-color: #e0e0ff;
+		}
+		div#container {
+			height: 100vh;
+			width: 1200px;
+			position: relative;
+			/*margin-right: 300px;*/
+		}
+		table#ranking {
+			position:absolute;
+			right: 0px;
+			top: 0px;
+			font-family: courier;
+		}
+		table#ranking th {
+			border-bottom: solid black 1px;
+			margin: 0px;
+			padding: 5px;
+			background-color: #eee;
+		}
+		table#ranking td {
+			padding: 5px;
+			text-align: center;
+			background-color: #e0e022;
+		}
+		.letter {
+			text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+			box-shadow: 5px 5px 5px grey;
+			display: block;
+			position: absolute;
+			font-weight: bold;
+			color: white;
+			background-color: blue;
+			text-align: center;
+			font-size: 160%;
+			width: var(--circle-size);
+			height: var(--circle-size);
+			line-height: var(--circle-size);
+			border-radius: var(--circle-size);
+		}
+		div#controls, div#pname {
+			visibility: hidden;
+		}
+		div#controls {
+			display: block;
+			width: 250px;
+			margin: 10% auto;
+			/*border-width: 1px;
+			border-color: black;*/
+		}
+
+		div#controls button {
+			width: 122px;
+			/*margin: 1px;*/
+			padding: 3px;
+			background-color: blue;
+			color: white;
+			border: solid 2px black;
+			border-radius: 15px;
+			font-family: Verdana;
+			font-size: 15px;
+		}
+		div#counter {
+			text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+			box-shadow: inset 3px 3px 5px black;
+			position: absolute;
+			top: 70%;
+			left: 19.5%;
+			color: white;
+			background-color: orange;
+			text-align: center;
+			font-size: 160%;
+			width: var(--timer-size);
+			height: var(--timer-size);
+			line-height: var(--timer-size);
+			border-radius: var(--timer-size);
+		}
+		div#correctcount {
+			text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+			box-shadow: inset 3px 3px 5px black;;
+			position: absolute;
+			top: 60%;
+			left: 20%;
+			color: white;
+			background-color: #2a2;
+			text-align: center;
+			font-size: 160%;
+			width: var(--corre-size);
+			height: var(--corre-size);
+			line-height: var(--corre-size);
+			border-radius: var(--corre-size);
+		}
+		div#question{
+			background-color: #55f;
+			color: white;
+			font-weight: bold;
+			padding: 10px;
+			border-radius: 10px;
+			margin-top: 5px;
+		}
+		button#togglebutt{
+			width: 250px;
+			font-size: 20px;
+			font-weight: bold;
+			border-radius: 20px;
+			padding: 3px;
+			background-color: blue;
+			color: white;
+			border: solid 2px black;
+			margin-bottom: 5px;
+		}
+		div#pname {
+			font-size: 20px;
+			font-family: Verdana;
+			vertical-align: center;
+		}
+		div#pname button{
+			font-size: 20px;
+			font-weight: bold;
+			border-radius: 20px;
+			padding: 3px 10px;
+			background-color: blue;
+			color: white;
+			border: solid 2px black;
+		}
+		div#pname input{
+			position: relative;
+			top: -2px;
+			line-height: 20px;
+			height: 26px;
+			font-size: 15px;
+			font-weight: bold;
+			border-radius: 20px;
+			padding: 3px 20px;
+			border: solid 2px black;
+			margin-right: 5px;
+		}
+		input#answer{
+			position: relative;
+			font-size: 15px;
+			font-weight: bold;
+			border-radius: 20px;
+			padding: 3px 20px;
+			border: solid 2px black;
+			margin-bottom: 5px;
+			left: -2px;
+		}
+		</style>
+		 <script src="questions.js"></script>
+	</head>
+<body>
+	<div id="container">
+		<button id="togglebutt" onclick="toggleGame()">EMPEZAR</button>
+		<div id="pname">
+			<input type="text" id="pnamei" value="Introduce tu nombre aquí..." onclick="this.value=''"><button onclick="insertName()">OK</button>
+		</div>
+		<div id="controls">
+			<input type="text" id="answer" autofocus value="Responde aquí..." onclick="this.value=''">
+			<button id="ansbutt" onclick="nextLetter(true)">Responder</button>
+			<button onclick="nextLetter()">Pasapalabra</button>
+			<div id="question">CON LA H. Interrupción colectiva de la actividad laboral por parte de los trabajadores con el fin de reivindicar ciertas condiciones o manifestar una protesta</div>
+		</div>
+		<div id="counter"></div>
+		<div id="correctcount">0</div>
+	</div>
+	<table id="ranking">
+		<tr>
+			<th>Nombre</th>
+			<th>Aciertos</th>
+			<th>Fallos</th>
+			<th>Tiempo restante</th>
+		</tr>
+	</table>
+<script type="text/javascript">
+var heightHalf = document.getElementById("container").clientHeight/2// window.innerHeight/2;
+var widthHalf = document.getElementById("container").clientWidth/2//window.innerWidth/2;
+var radius = heightHalf*0.8;
+var N = questions.length;
+// Draw Start
+var ang = 2*Math.PI/N;
+for (var i = 0; i < N; i++) {
+	var phi = i*ang-Math.PI/2;
+	var x = radius*Math.cos(phi) + widthHalf;
+	var y = radius*Math.sin(phi) + heightHalf;
+	var letterDiv = document.createElement("div");
+	letterDiv.classList.add('letter');
+	letterDiv.id =questions[i].letter;
+	// Leemos el CSS para saber el tamaño del círculo y así poder centrarlos.
+	var styles = getComputedStyle(document.documentElement);
+	var circleSize = parseInt(styles.getPropertyValue('--circle-size'));
+	//
+	letterDiv.style.left = (x - circleSize) +'px';
+	letterDiv.style.top  = (y - circleSize) +'px';
+	letterDiv.innerHTML = questions[i].letter.toUpperCase();
+	//document.body.appendChild(letterDiv);
+	document.getElementById("container").appendChild(letterDiv);
+};
+// Draw End
+
+// Variables set START
+var kounter,j,gameCount,counter,gameIsOff,t,correct,incorrect;
+var seconds = 200;
+var ranking = [];
+var randArr = [];
+function setVariables() {
+	kounter = -1;
+	gameCount = 0;
+	counter = seconds;
+	gameIsOff = true;
+	for (var i = 0; i < N; i++) {
+		randArr[i] = Math.floor(Math.random()*2);
+	};
+	correct = 0;
+	incorrect = 0;
+};
+setVariables();
+// Variables set END
+
+// Game check Start
+function addToKounter () {
+	kounter++;
+	j = kounter%N;
+	if (questions[j].status && gameCount) { // Para evitar bucle infinito
+		addToKounter();
+	};
+};
+
+function askQuestion () {
+	document.getElementById("question").innerHTML = questions[arguments[0]].question[randArr[arguments[0]]];
+};
+
+function nextLetter () {
+	if (arguments[0]) {
+		if (document.getElementById("answer").value.toLowerCase() === questions[j].answer[randArr[j]]) {
+			questions[j].status = 1;
+			document.getElementById(questions[j].letter).style.background = "green";
+			correct++;
+			document.getElementById("correctcount").innerHTML = correct;
+		} else{
+			questions[j].status = -1;
+			document.getElementById(questions[j].letter).style.background = "red";
+			incorrect++;
+		};
+		gameCount++
+	};
+	document.getElementById("answer").value = '';
+	if (gameCount === N) {
+		stopGame();
+	} else {
+		addToKounter();
+		askQuestion(j);
+	};
+};
+function insertName(){
+	var rl = ranking.length-1;
+	ranking[rl][0] = document.getElementById('pnamei').value
+	document.getElementById('pnamei').value = '';
+	document.getElementById("pname").style.visibility = "hidden";
+	var table = document.getElementById("ranking");
+	var row = table.insertRow(1);
+	for (var i = 0; i < 4; i++) {
+		row.insertCell(i).innerHTML = ranking[rl][i];
+	};
+	sortTable();
+};
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("ranking");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[1];
+      y = rows[i + 1].getElementsByTagName("TD")[1];
+      //check if the two rows should switch place:
+      if (x.innerHTML < y.innerHTML) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch= true;
+        break;
+      };
+    };
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    };
+  };
+};
+//-- Para que funcione la tecla enter
+document.getElementById("answer").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("ansbutt").click();
+    };
+});
+//-- fin enter
+// Game check End
+
+// Timer Start
+
+function showCounter(){
+	document.getElementById("counter").innerHTML = counter;
+};
+showCounter();
+
+function gameTimer() {
+	showCounter();
+	counter--;
+	t = setTimeout(function(){ gameTimer() }, 1000);
+	if (counter < -1) {
+		counter = 0;
+		stopGame();
+	};
+};
+
+function toggleGame() {
+	if (gameIsOff) {
+		gameIsOff = false;
+		addToKounter ();
+		askQuestion (0);
+		document.getElementById("correctcount").innerHTML = 0;
+		document.getElementById("togglebutt").innerHTML = "ACABAR PARTIDA";
+		document.getElementById("pname").style.visibility = "hidden";
+		document.getElementById("controls").style.visibility = "visible";
+		document.getElementById("ansbutt").disabled = false;
+		var letterClass = document.getElementsByClassName("letter");
+		for (var i = 0; i < N; i++) {
+			questions[i].status = 0;
+			letterClass[i].style.background = "blue";
+		};
+		gameTimer();
+	} else{
+		stopGame();
+	};
+};
+
+function stopGame() {
+	document.getElementById("togglebutt").innerHTML = "EMPEZAR";
+	document.getElementById("ansbutt").disabled = true;
+	document.getElementById("controls").style.visibility = "hidden";
+	document.getElementById("pname").style.visibility = "visible";
+	ranking.push(['',correct,incorrect,counter]);
+	setVariables();
+	clearTimeout(t);
+	showCounter();
+};
+// Timer End
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+		<title>Tema 2</title>
+		<meta charset="utf-8" /> 
+		<style type="text/css"></style>
+</head>
+<body>
+<script type="text/javascript">
+//JS Objects
+	var avenger = {
+		name : "Tony",
+		class : "VII",
+		id : 1
+	};
+//a) Escribe una función que liste los nombres de propiedad del objeto (Puedes usar el objeto creado más arriba)
+
+	function tema2exe_a() {
+		var str = [];
+		var ctn = 0;
+		for (const k in avenger) {
+			str[ctn] = k;
+			ctn += 1;
+		};
+		return str.join(', ');
+	};
+
+	console.log(tema2exe_a());
+
+//b) Ahora, crea una función que liste solo los valores de las propiedades.
+
+	function tema2exe_b() {
+		var str = [];
+		var ctn = 0;
+		for (const k in avenger) {
+			str[ctn] = avenger[k];
+			ctn += 1;
+		};
+		return str.join(', ');
+	};
+	console.log(tema2exe_b());
+
+//c) Cambia el valor de la propiedad class por "XI" y asegurate de que los cambios se han efectuado.
+
+	avenger.class = "XI";
+	console.log('new class = '+avenger.class)
+
+//d) Ahora, elimina la propiedad ID y asegura los cambios.
+
+	delete avenger.id;
+	console.log(avenger.id);
+
+//e) Añade una nueva propiedad, por ejemplo city y dale un valor. http://www.w3schools.com/js/js_properties.asp
+
+	avenger.city = "New York";
+
+//e1) Asegura los cambios solo imprimiendo esa nueva propiedad.
+
+	console.log("City => "+avenger.city);
+
+//f) Lista el numero de propiedades que contiene el objeto.
+
+	function tema2exe_f() {
+		var ctn = 0;
+		for (k in avenger) {
+			ctn += 1;
+		};
+		return ctn;
+	};
+	console.log("There are "+tema2exe_f()+" info fields");
+
+//g) Cambia la propiedad name por fullName.
+
+	avenger.fullName = avenger.name;
+	delete avenger.name;
+
+//g1) Asegura los cambios.
+
+	console.log(avenger.fullName) // Tony Stark
+
+//h) Lista todas las propiedades del objeto a través de un console.log()
+
+	console.log("Hi there, I'm "+avenger.fullName+", my current class is "+avenger.class+", I live in "+avenger.city+".")
+
+//h1) Añade más propiedades al objeto, como... markAverage, country, job, studies...
+
+	avenger.markAverage = 10;
+	avenger.country = "USA";
+	avenger.job = "Millionaire";
+	avenger.studies = "A lot of things";
+
+//h2) Asegura los cambios volviendo a listar los valores del objeto
+
+console.log("And my average is "+avenger.markAverage+", my country is "+avenger.country+", I'm a "+avenger.job+" and I've studied "+avenger.studies) // NYC
+
+//i) Crea un constructor de objetos llamado "Avenger", al cual le pasarás ciertos parametros, creando una instancia del objeto con las propiedades de nuestro objeto creado. (Échale un ojo a la referencia de abajo.) http://www.w3schools.com/js/js_object_definition.asp
+
+	function Avenger(fullName, classRoom, city, job, studies,markAv) {
+	    this.fullName = fullName;
+	    this.classRoom = classRoom;
+	    this.city = city;
+	    this.job= job;
+	    this.studies= studies;
+	    this.markAv = markAv;
+	}
+	var tonyStark = new Avenger ("Tony Stark", "XI", "NYC", "Ingeneer", "MIT", 10)
+	console.log(tonyStark)
+
+//j) Crea otro objeto y imprime sus propiedades por pantalla.
+
+	var captainAmerica = new Avenger("Steve Rogers","XL","New York","Soldier","Secondary School",5)
+	console.log(captainAmerica)
+
+//k) Crea una propiedad del objeto que liste automáticamente los valores de la instancia.
+
+	function Avenger(fullName, classRoom, city, job, studies, markAv) {
+		this.fullName = fullName;
+		this.classRoom = classRoom;
+		this.city = city;
+		this.job= job;
+		this.studies= studies;
+		this.markAv = markAv;
+		this.description = function() {
+			var str = [];
+			var ctn = 0;
+			for (k in this) {
+				if (k!=="description") {
+					str[ctn] = this[k];
+					ctn += 1;
+				};
+			};
+			return console.log(str.join(', '));
+        };
+	};
+	var tonyStark = new Avenger ("Tony Stark", "XI", "NYC", "Ingeneer", "MIT", 10);
+	tonyStark.description();
+
+//l) Ahora, crea una función que solo liste los nombres de los objetos instanciados
+
+	var avengers = [
+		new Avenger ("Tony Stark", "XI", "New York", "Ingeneer", "MIT", 10),
+		new Avenger ("Steve Rogers","VII","New York","Soldier","Secondary School",5),
+		new Avenger ("Bruce Banner","XXL","Harvard","Cientist","Harvard",9.9),
+		new Avenger ("Peter Parker","III","New York","Student","Highschool",9),
+		new Avenger ("Ant Man","I","New York","Programmer","University",8)
+	];
+	function avengersName(){
+		var str = [];
+		for (var i = 0; i < avengers.length; i++) {
+			str[i] = avengers[i].fullName;
+		};
+		return str.join(', ');
+	} ;
+	console.log(avengersName());
+
+//m) Crea varios objetos con las mismas propiedades, como por ejemplo la ciudad, crea una función para que solo liste los nombres de los Avengers que sean de la misma ciudad y cuantos hay.
+
+	function cityList () {
+		var count = 0;
+		var who = [];
+		for (var i = 0; i < avengers.length; i++) {
+			if (avengers[i].city === "New York") {
+				who[count] = i;
+				count += 1;
+			};
+		};
+		var srt = [];
+		for (var i = 0; i < who.length; i++) {
+			srt[i] = avengers[who[i]].fullName;
+		};
+		return "There are "+count+" avengers living in New York: "+srt.join(', ')+'.';
+	};
+	console.log(cityList());
+
+//n) Para acabar, créate a ti mismo y crea una función que recoja todas las markAv y muestre la media.
+
+	avengers[avengers.length] = new Avenger ("Manuela Carmena","IX","Barcelona","Jueza","UIM",6);
+	function medianMarkAv (){
+		var median = 0;
+		for (var i = 0; i < avengers.length; i++) {
+			median += avengers[i].markAv;
+		}
+		return median/avengers.length;
+	};
+	console.log("The average is "+medianMarkAv());
+
+//ñ) Ahora, crea una funcion que recoja los avengers en parejas (será necesario que tengan un id, por comodidad al aparejarlos), es decir, de dos en dos, compare sus markAv y que muestre el mayor de ambos.
+
+	function compare2by2 (){
+		var messege ='';
+		var n = 0;
+		if ( (avengers.length%2) != 0) {
+			n = avengers.length-1;
+		} else {
+			n = avengers.length;
+		}
+		for (var i = 0; i < n; i+=2) {
+			messege = avengers[i].fullName+" vs "+avengers[i+1].fullName+" => ";
+			if (avengers[i].markAv > avengers[i+1].markAv) {
+				messege += avengers[i].fullName+" is better!";
+			} else {
+				messege += avengers[i+1].fullName+" is better!";
+			};
+			console.log(messege);
+		}
+	};
+	compare2by2();
+
+//ñ1) Intenta crear las parejas de forma aleatoria.
+
+	function compare2by2Rand() {
+		console.log("--- Random Compare");
+		var n = avengers.length;
+		var linList = [];
+		for (var i = 0; i < n; i++) {
+			linList[i] = i
+		};
+		var randList = [];
+		for (var i = 0; i < n; i++) {
+			var m = Math.floor(Math.random()*(linList.length-1));
+			randList[i] = linList[m];
+			linList.splice(m,1)
+		};
+		var messege ='';
+		if ( (randList.length%2) != 0) {
+			randList.pop();
+		};
+		for (var i = 0; i < randList.length; i+=2) {
+			var j = randList[i];
+			var k = randList[i+1];
+			messege = avengers[j].fullName+" vs "+avengers[k].fullName+" => ";
+			if (avengers[j].markAv > avengers[k].markAv) {
+				messege += avengers[j].fullName+" is better!";
+			} else {
+				messege += avengers[k].fullName+" is better!";
+			};
+			console.log(messege);
+		}
+	};
+	compare2by2Rand();
+
+</script>
+</body>
+</html>
