@@ -52,6 +52,7 @@ interests           //array
 function Student (firstName, lastName, age, gender, interests) {
     Person.call(this,firstName, lastName, age, gender, interests);
 }
+Student.prototype = new Person();
 /*
 b) The Student must inherit all methods from Person and overwrite greeting method to change its behavior to print:
 greeting() //returns: Yo! I'm  <first-name>.
@@ -77,7 +78,7 @@ function Teacher (firstName, lastName, age, gender, interests, subject) {
     Person.call(this,firstName, lastName, age, gender, interests);
     this.subject = subject;
 }
-
+Teacher.prototype = new Person();
 /*
 b) The Teacher must inherit all methods from Person and overwrite greeting method to change its behavior to print:
 
