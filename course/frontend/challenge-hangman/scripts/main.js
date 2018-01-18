@@ -14,7 +14,7 @@ function Hangman (word,attemps) {
         if (str.length > 1 && str === word) {
             return "Very well! You Guessed!";
         } else if (str.length === 1 ){
-            if ( --attemps > 0) {
+            if (--attemps > 0) {
                 var correctAns = false;
                 for (var i = 0; i < N; i++) {
                     if (str === wordArr[i]) {
