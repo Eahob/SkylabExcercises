@@ -28,13 +28,13 @@ bio()      //returns: <first-name> <last-name> is <age> years old. <He/She> like
 */
 
 Person.prototype.greeting = function () {
-    return 'Hi! I\'m '+this.firstName;
+    return 'Hi! I\'m ' + this.firstName;
 }
-Person.prototype.farewell = function() {
-    return this.firstName +' has left the building. Bye for now!';
+Person.prototype.farewell = function () {
+    return this.firstName + ' has left the building. Bye for now!';
 }
 Person.prototype.bio = function () {
-    return this.firstName + ' ' + this.lastName + ' is ' + this.age + ' years old. '+ this.gender + ' likes '+ this.interests.join(', ');
+    return this.firstName + ' ' + this.lastName + ' is ' + this.age + ' years old. ' + this.gender === "male" ? "He" : "She"  + ' likes ' + this.interests.join(', ');
 }
 
 /*
@@ -49,16 +49,16 @@ gender              //string
 interests           //array
 */
 
-function Student (firstName, lastName, age, gender, interests) {
-    Person.call(this,firstName, lastName, age, gender, interests);
+function Student(firstName, lastName, age, gender, interests) {
+    Person.call(this, firstName, lastName, age, gender, interests);
 }
 Student.prototype = new Person();
 /*
 b) The Student must inherit all methods from Person and overwrite greeting method to change its behavior to print:
 greeting() //returns: Yo! I'm  <first-name>.
 */
-Student.prototype.greeting = function() {
-    return "Yo! I'm "+this.firstName;
+Student.prototype.greeting = function () {
+    return "Yo! I'm " + this.firstName;
 }
 
 /*
@@ -74,8 +74,8 @@ interests           //array
 subject             //string
 */
 
-function Teacher (firstName, lastName, age, gender, interests, subject) {
-    Person.call(this,firstName, lastName, age, gender, interests);
+function Teacher(firstName, lastName, age, gender, interests, subject) {
+    Person.call(this, firstName, lastName, age, gender, interests);
     this.subject = subject;
 }
 Teacher.prototype = new Person();
@@ -85,6 +85,6 @@ b) The Teacher must inherit all methods from Person and overwrite greeting metho
 greeting() //returns: Hello. My name is <Mr./Mrs> <last-name> and I teach <subject>.
 */
 
-Teacher.prototype.greeting = function() {
-    return "Yo! I'm "+this.gender+' '+this.lastName+' and I teach '+this.subject;
+Teacher.prototype.greeting = function () {
+    return "Yo! I'm " + this.gender === "male" ? "Mr." : "Mrs." + ' ' + this.lastName + ' and I teach ' + this.subject;
 }
