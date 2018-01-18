@@ -15,15 +15,17 @@ function Hangman (word,attemps) {
             return "Very well! You Guessed!";
         } else if (str.length === 1 ){
             if ( --attemps > 0) {
+                var correctAns = false;
                 for (var i = 0; i < N; i++) {
                     if (str === wordArr[i]) {
                         board[i] = wordArr[i];
                         delete wordArr[i];
                         counter++;
+                        correctAns = true;
                     }
                 }
-                //if (N === counter) {}
-                return attemps + ' ' + board.join(' ') + (N === counter ? '- You won!':'');
+                if (correctAns) ++attemps;
+                return attemps + ' ' + board.join(' ') + (N === counter ? ' - You won!':'');
             } else {
                 return gameOver();
             }
