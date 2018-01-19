@@ -11,7 +11,7 @@ function Hangman(word, attemps) {
     var gameOver = false;
     var win = false;
     this.try = function (response) {
-        if (!gameOver && !win) {
+        if (!gameOver && !win) { //try !(gameOver || win)
             var message = "This is not a correct input. Try to write another one";
             if (typeof response === "string") {
                 var responseUpper = response.toUpperCase();
