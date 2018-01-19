@@ -17,3 +17,42 @@ var test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 console.log(test);
 console.log(test.shuffle());
 
+/*
+LIL function to convert camelCase text into lower-case case and spaces (e.g. "helloWorld" -> "hello world").
+*/
+
+String.prototype.unCamel = function () {
+    var newString = '';
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] <= "Z") {
+            newString += ' ' + this[i].toLowerCase();
+        } else {
+            newString += this[i];
+        }
+    }
+    return newString;
+}
+
+camelCaseString = 'enUnLugarDeLaManchaDeCuyoNombreNoQuieroAcordarme';
+
+console.log(camelCaseString.unCamel())
+
+/*
+LIL function to detect if a string is numeric (e.g. isNumber('0') => true).
+*/
+function isNumeric(string) {
+    return parseFloat(string) == string;
+}
+
+/*
+LIL function to detect if a string has any symbol (e.g. hasSymbol('hello%') => true).
+*/
+
+function hasSymbol(string) {
+    for (var i = 0; i < string.length; i++) {
+        if ( !( ( "A" <= string[i] && string[i] <= "Z") || ("a" <= string[i] && string[i] <= "z") ) ) {
+            return true
+        }
+    }
+    return false;
+}
