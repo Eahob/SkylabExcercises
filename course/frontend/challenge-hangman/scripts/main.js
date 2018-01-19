@@ -1,6 +1,67 @@
 /* Recreate the game of Hangman */
 
 function Hangman(word, attemps) {
+    var wordArr = word.toUpperCase().split('');
+    var N = word.length;
+    var board = [];
+    for (var i = 0; i < N; i++) {
+        board[i] = '_';
+    }
+    var letterCount = 0;
+    var gameOver = false;
+    var win = false;
+    this.try = function (response) {
+        if (!gameOver && !win) {
+            var message = "This is not a correct input. Try to write another one";
+            if (typeof response === "string") {
+                var responseUpper = response.toUpperCase();
+            } else {
+                return message;
+            }
+
+            if (!(responseUpper >= "A" && responseUpper <= "Z")) {
+                return message;
+            }
+            if (responseUpper.length > 1) {
+                //word
+                if (responseUpper === word.toUpperCase()) {
+                    //win
+                    win = true;
+                    return "You have guessed the word, well done!";
+                } else {
+                    //lose
+                    gameOver = true;
+                    return "Sorry, you have not guessed... the correct word is " + word.toUpperCase() + ".";
+                }
+            } else {
+                //letter
+                var foundALetter = false;
+                for (var i = 0; i < N; i++) {
+                    if (responseUpper === wordArr[i]) {
+                        board[i] = wordArr[i];
+                        delete wordArr[i];
+                        letterCount++
+                        foundALetter = true;
+                    }
+                }
+                // Show game
+                if (!foundALetter) { attemps-- }
+                if (attemps === 0) { gameOver = true; }
+                if (N === letterCount) { win = true; }
+                return attemps + ' ' + board.join(' ');
+            }
+
+        } else {
+            //Show message
+            return "GAME OVER.";
+        }
+    }
+}
+
+var game = new Hangman('hello', 5);
+
+/*
+function Hangman(word, attemps) {
     var wordArr = word.toLowerCase().split('');
     var board = [];
     var N = word.length;
