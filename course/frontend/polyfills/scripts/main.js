@@ -50,9 +50,28 @@ LIL function to detect if a string has any symbol (e.g. hasSymbol('hello%') => t
 
 function hasSymbol(string) {
     for (var i = 0; i < string.length; i++) {
-        if ( !( ( "A" <= string[i] && string[i] <= "Z") || ("a" <= string[i] && string[i] <= "z") ) ) {
+        if (!(("A" <= string[i] && string[i] <= "Z") || ("a" <= string[i] && string[i] <= "z"))) {
             return true;
         }
     }
     return false;
 }
+
+/*
+text('something').wrap('$').wrap('{','}').wrap('#').toString() -> #{$something$}#
+*/
+
+function text(str) {
+    return {
+        wrap: function (a, b) {
+            if ( a != undefined) {
+                str = b === undefined ? a + str + a : a + str + b;
+            }
+            return this;
+        },
+        toString: function () {
+            return str;
+        }
+    }
+}
+

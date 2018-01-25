@@ -1,0 +1,46 @@
+ul {
+    width:150px;
+    background-color: cyan;
+    list-style-type: square;
+    text-align: center;
+}
+li {
+    background-color: white;
+    text-decoration: underline;
+}
+
+h1 {
+    text-shadow: 7px -7px 2px grey;
+    text-decoration: underline red;
+}
+
+.green-rounded-button {
+    color: white;
+    font-size: large;
+    font-weight: bold;
+    background-color: green;
+    width: 150px;
+    height: 70px;
+    border: solid;
+    border-radius: 20px;
+    border-color:darkgreen;
+    box-shadow: 0px 5px grey;
+}
+.green-rounded-button:hover {
+    background-color: white;
+    color: green;
+    border-color:darkslategrey;
+}
+
+img {
+    border-radius: 150px;
+    border: dotted;
+    filter: grayscale(100%);
+}
+#triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid red;
+}

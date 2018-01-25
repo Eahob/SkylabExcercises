@@ -56,23 +56,22 @@ console.log(difference([1, 2, 3, 4, 5], [1, [2], [3, [[4]]],[5,6]]));
 
 function findDifferences(arr1, arr2) {
     var result = [];
-    var a = arr1.join().split(",");
-    var b = arr2.join().split(",");
     var aa = [];
     var bb = [];
-    /*
-    function aplanar(arr) {
+
+    function phlatArray(arr) {
         var result = [];
         for (var i = 0; i < arr.length; i++) {
             if (Array.isArray(arr[i])) {
-                result.concat(aplanar(arr[i]));
+                result = result.concat(phlatArray(arr[i]));
             } else {
                 result.push(arr[i]);
             }
         }
         return result;
     }
-    */
+    var a = phlatArray(arr1);
+    var b = phlatArray(arr2);
     for (var i = 0; i < a.length; i++) {
         aa[a[i]] = a[i];
     }
@@ -116,7 +115,7 @@ Write a JavaScript program to add items in an blank array and display the items.
 */
 
 function addItems(blankArray, elem) {
-    blankArray = elem;
+    return blankArray = elem;
 }
 /*
 generateArrayLength
@@ -196,11 +195,21 @@ Write a JavaScript program to find duplicate values in a JavaScript array.
 
 function findDuplicates(arr1, arr2) {
     var result = [];
-
-    var a = arr1.join().split(",");
-    var b = arr2.join().split(",");
     var aa = [];
     var bb = [];
+    function phlatArray(arr) {
+        var result = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i])) {
+                result = result.concat(phlatArray(arr[i]));
+            } else {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+    var a = phlatArray(arr1);
+    var b = phlatArray(arr2);
 
     for (var i = 0; i < a.length; i++) {
         aa[a[i]] = a[i];
@@ -228,8 +237,7 @@ Write a JavaScript function to merge two arrays and removes all duplicates eleme
 */
 
 function mergeArrays(arr1, arr2) {
-    var dupli = findDuplicates(arr1, arr2);
-    
+    return findDifferences(arr1, arr2);
 }
 
 /*
@@ -257,9 +265,73 @@ mostFrequentItem
 Write a JavaScript program to find the most frequent item of an array.
 */
 
-function mostFrequentItem() {
-    //
+function mostFrequentItem(list) {
+    var most = {};
+    function phlatArray(arr) {
+        var result = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i])) {
+                result = result.concat(phlatArray(arr[i]));
+            } else {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+    result = phlatArray(list);
+    console.log(result)
+    for (var i = 0; i < result.length; i++) {
+        if (most[result[i]]) {
+            most[result[i]]++;
+        } else {
+            most[result[i]] = 1;
+        }
+    }
+    var last = -Infinity;
+    for (var k in most) {
+        if (last < most[k]) {
+            last = most[k];
+            result = k
+        }
+    }
+    return result;
 }
 
 
-//test = [5, 2, 5, 2, [65, 48, 65, 45,], 87, [98, 789, [879, 321, 3, [789, 321, 232], [78, 89, 98]], 654, 6]]
+//test = [5, 2, 5, 2, [3, 2, 5, 5], 6, [6, 5, [2, 3, 3, [5, 3, 2], [6, 2, 5]], 6, 6]]
+
+/*
+arrayFilled (string)
+Write a JavaScript function to create a specified number of elements with pre-filled string value array.
+
+    Test Data :
+    console.log(arrayFilled(3, 'default value')); 
+    ["default value", "default value", "default value"]
+    console.log(arrayFilled(4, 'password'));
+    ["password", "password", "password", "password"]
+*/
+function arrayFilled(num, value) {
+    var result = [];
+    if (typeof num != "number") {
+        num = 0
+    }
+    for (var i = 0; i < num; i++) {
+        result[i] = value;
+    }
+    return result;
+}
+
+/*
+Sum squares
+Write a JavaScript program to find the sum of squares of a numeric vector.
+*/
+
+function sumSquares(numArr) {
+    var sum = 0;
+    for (var i = numArr.length - 1; i > -1; i--) {
+        if (typeof numArr[i] == "number") {
+            sum += numArr[i] ** 2;
+        }
+    }
+    return sum;
+}

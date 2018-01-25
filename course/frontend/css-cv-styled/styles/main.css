@@ -1,0 +1,56 @@
+/*naranja 199,139,49*/
+
+body {
+    background-color: #f3f3f3;
+    margin: 0px;
+    font-family: Verdana;
+}
+
+body > header {
+    background-color: #ededed;
+    padding: 40px;
+    height: 220px;
+    border-bottom: solid 5px rgb(199,139,49)
+}
+
+body > header img {
+    border-radius: 60px;
+    margin-right: 40px;
+}
+body > header section > * {
+    float: left;
+}
+body > header aside {
+    float: right;
+}
+body > header aside ul{
+    list-style-type: none;
+}
+
+h1 {margin: 16px 0 0;font-size: 22pt;}
+h2 {font-weight: 200;margin: 0px;font-size: 20pt;}
+
+main {
+    margin: 40px 40px 0;
+}
+main article > * {
+   margin: 0;
+}
+main article > p {
+    position: relative;
+    top:-16pt;
+    margin-left: 30%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+main article > h3 {
+    font-size: 16pt;
+    line-height: 16pt;
+    color: rgb(199,139,49);
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+main article {
+    /*padding-bottom: 20px;*/
+    border-bottom: solid 2px #dedede;
+}
