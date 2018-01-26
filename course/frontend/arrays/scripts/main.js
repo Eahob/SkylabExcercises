@@ -279,7 +279,7 @@ function mostFrequentItem(list) {
         return result;
     }
     result = phlatArray(list);
-    console.log(result)
+    //console.log(result)
     for (var i = 0; i < result.length; i++) {
         if (most[result[i]]) {
             most[result[i]]++;
@@ -299,6 +299,64 @@ function mostFrequentItem(list) {
 
 
 //test = [5, 2, 5, 2, [3, 2, 5, 5], 6, [6, 5, [2, 3, 3, [5, 3, 2], [6, 2, 5]], 6, 6]]
+
+/*
+moveElement
+Write a JavaScript function to move an array element from one position to another.
+*/
+function moveElment(arr, pos1, pos2) {
+    if (typeof pos1 === 'number' && typeof pos2 === 'number') {
+        var temp = arr[pos2];
+        arr[pos2] = arr[pos1];
+        arr[pos1] = temp;
+    }
+    return arr;
+}
+
+/*
+swapCase
+Write a JavaScript program which accept a string as input and swap the case of each character.
+For example if you input 'The Quick Brown Fox' the output should be 'tHE qUICK bROWN fOX'.
+*/
+
+function swapCase(str) {
+    result = '';
+    for (var i = 0; i < str.length; i++) {
+        if (str[i] == str[i].toLowerCase()) {
+            result += str[i].toUpperCase()
+        } else {
+            result += str[i].toLowerCase()
+        }
+    }
+    return result;
+}
+/*
+Print elements array
+Write a JavaScript program which prints the elements of the following array.
+Note : Use nested for loops.
+
+    Sample array : var a = [[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7, 4, 28, 14], [3, 10, 26, 7]];
+    Sample Output : 
+    "row 0" 
+    " 1" 
+    " 2" 
+    " 1"
+    " 24"
+    "row 1" 
+*/
+
+function printThisArray(arr) {
+    var result = '';
+    for (var i = 0; i < arr.length; i++) {
+        result += 'row ' + i + '\n';
+        for (var j = 0; j < arr[i].length; j++) {
+            result += ' ' + arr[i][j] + '\n';
+        }
+    }
+    return result;
+}
+var thisArray = [[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7, 4, 28, 14], [3, 10, 26, 7]];
+console.log(printThisArray(thisArray));
 
 /*
 arrayFilled (string)
@@ -335,3 +393,7 @@ function sumSquares(numArr) {
     }
     return sum;
 }
+/*
+removeDuplicate
+Write a JavaScript program to remove duplicate items from an array (ignore case sensitivity).
+*/

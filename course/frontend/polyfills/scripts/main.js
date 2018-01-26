@@ -64,7 +64,7 @@ text('something').wrap('$').wrap('{','}').wrap('#').toString() -> #{$something$}
 function text(str) {
     return {
         wrap: function (a, b) {
-            if ( a != undefined) {
+            if (a != undefined) {
                 str = b === undefined ? a + str + a : a + str + b;
             }
             return this;
@@ -75,3 +75,20 @@ function text(str) {
     }
 }
 
+/* Now without .toString() at the end an can use any string method */
+
+/* loop challenge */
+
+function loop(arr, callback) {
+    var result = [];
+    var i = arr.length;
+    function rec() {
+        if (0 < i--) {
+            result[i] = callback(arr[i]);
+            rec();
+        }
+    }
+    rec();
+    return result;
+}
+console.log(loop([9,8,7],function(a){return 2*a}))
