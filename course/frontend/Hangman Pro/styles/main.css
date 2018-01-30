@@ -1,0 +1,96 @@
+
+html,body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: darkgray;
+}
+
+header {
+    background-color: #CCC;
+    height: 100px;
+    text-align: center;
+}
+h1 {
+    color: rgb(161, 128, 37);
+    font-size: 54pt;
+    font-family: Verdana;
+    margin: 0;
+    line-height: 100px;
+}
+
+#letters span {
+    display: inline-block;
+    font-size: 36pt;
+    height: 36pt;
+    width: 36pt;
+    border-bottom: solid black 3px;
+    margin: 0 5px;
+    color: darkgray;
+    text-align: center;
+
+}
+.borderless {
+    border: none !important;
+    color: black !important;
+}
+
+#gamestart {
+    display: block;
+    width: 90%;
+    margin: 150px auto;
+    text-align: center;
+}
+#gamestart input{
+    color: rgb(161, 128, 37);
+    background-color: #CCC;
+    width: 300px;
+    height: 200px;
+    font-size: 54pt;
+    border: solid goldenrod 5px;
+    border-radius: 25px;
+}
+#gamestart input:hover,#gameset input:hover,#gamedata input:hover{
+    color: goldenrod;
+    border-color: rgb(161, 128, 37);
+}
+
+#gameset {
+    width: 400px;
+    margin: 150px auto;
+    font-size: 14pt;
+}
+#gameset input,#gamedata input {
+    background-color: #CCC;
+    border: solid goldenrod 1px;
+    color: rgb(161, 128, 37);
+}
+#gameset input, #gameset label {
+    font-size: inherit;
+    font-family: Verdana; 
+}
+#gameset label {
+    color: rgb(97, 69, 0);
+}
+input[type="number"]{
+    width: 50px;
+}
+#gameset input[type="submit"]{
+    margin-top: 15px;
+    color: rgb(161, 128, 37);
+    background-color: #CCC;
+    /*border: solid goldenrod 1px;*/
+    border-radius: 5px;
+}
+button, #gameset, #gamedata, section:first-child {
+    display: none;
+}
+
+aside {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+}

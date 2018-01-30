@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+    <link href="https://fonts.googleapis.com/css?family=Rammetto+One" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="vendor/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="scripts/Hangman.js"></script>
+    <script src="scripts/main.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>HANGMAN</h1>
+    </header>
+    <main>
+        <section>
+            <!-- Display Letters and hanged man -->
+            <div id="letters"></div>
+            <div id="hanged">Attemps left:<span></span></div>
+            <div id="message"></div>
+        </section>
+        <section>
+            <form id="gamestart">
+                <input type="submit" value="PLAY">
+            </form>
+            <!-- messegs,inputs,etc -->
+            <form id="gameset">
+                <label>Enter a word:</label>
+                <input type="text"><br>
+                <label>Number of attemps:</label>
+                <input type="number" min="1">
+                <input type="submit" value="GO">
+            </form>
+            <form id="gamedata">
+                <label>Enter a character or a word</label>
+                <input type="text">
+                <input type="submit" value="Try">
+            </form>
+            <button>Play again</button>
+        </section>
+        <!--<aside></aside>-->
+    </main>
+</body>
+
+</html>
