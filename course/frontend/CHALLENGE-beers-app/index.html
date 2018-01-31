@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Beers App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="vendor/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #eee;
+        }
+
+        header {
+            padding-top: 5px;
+            background-color: inherit;
+        }
+
+        #searchinput {
+            font-size: 34pt;
+        }
+
+        main {
+            padding-top: 70pt;
+            height: 100%;
+        }
+
+        #info {
+            display: none;
+           /* position: fixed;
+            right: calc(100%/12);*/
+        }
+        img {margin:0 auto;}
+    </style>
+</head>
+
+<body>
+    <header class="container-fluid fixed-top">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <form class="form-inline">
+                    <input id="searchinput" type="text" class="form-control input-lg col-12" placeholder="Search a beer">
+                </form>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+    </header>
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-3">
+                <div id="box" class="list-group "></div>
+            </div>
+
+            <div id="info" class="col-7">
+                <div class="card bg-light text-dark">
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                            <p class="card-text"></p>
+                            <img src="" alt="Beer image" class="rounded">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </main>
+
+
+    <script src="vendor/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <!--
+    <script src="vendor/jquery/3.3.1/jquery-3.3.1.slim.min.js"></script>-->
+    <script src="vendor/popper/1.12.9/popper.min.js"></script>
+    <script src="vendor/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

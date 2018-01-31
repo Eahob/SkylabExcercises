@@ -1,0 +1,74 @@
+$bh:12px;
+$bhh:$bh/2;
+$backgroundColorDark:darkgray;
+$backgroundColorLight:#CCC;
+$colorPrimary:rgb(161, 128, 37);
+$colorSecondary:goldenrod;
+html,body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $backgroundColorDark;
+}
+header {
+    background-color: $backgroundColorLight;
+    height: 100px;
+    text-align: center;
+}
+h1 {
+    color: $colorPrimary;
+    font-size: 54pt;
+    font-family: Verdana;
+    margin: 0;
+    line-height: 100px;
+}
+* {
+    box-sizing: border-box;
+}
+
+input[type=text],input[type=number]{
+    width: 100%;
+    padding: $bh;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+label {
+    padding: $bh $bh $bh 25%;
+    display: inline-block;
+}
+
+input[type=submit], button {
+    background-color: #4CAF50;
+    color: white;
+    padding: $bh 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+input[type=submit]:hover,button:hover {
+    background-color: #45a049;
+}
+
+.col-33 {
+    float: left;
+    width: 33.33%;
+    margin-top: $bhh;
+}
+.row {
+    padding:0 16.67%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+

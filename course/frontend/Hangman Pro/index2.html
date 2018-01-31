@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="vendor/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="scripts/Hangman.js"></script>
+    <script src="scripts/main.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>HANGMAN</h1>
+    </header>
+    <main>
+        <button>PLAY</button>
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-33">
+                        <label for="fname">Enter a word:</label>
+                    </div>
+                    <div class="col-33">
+                        <input type="text" placeholder="A word to guess">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-33">
+                        <label for="country">Number of attemps: </label>
+                    </div>
+                    <div class="col-33">
+                        <input type="number" min="1">
+                    </div>
+                    <div class="col-33">
+                        <input type="submit" value="GO">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-33">
+                        <label for="fname">Try a letter or a word: </label>
+                    </div>
+                    <div class="col-33">
+                        <input type="text">
+                    </div>
+                    <div class="col-33">
+                        <input type="submit" value="Try">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <button>PLAY AGAIN</button>
+    </main>
+    <aside></aside>
+</body>
+
+</html>
