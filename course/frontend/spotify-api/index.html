@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>🎼🎶</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            float: left;
+        }
+
+        #playsong {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input id="searchinput" type="text" placeholder="Search an artist">
+    </form>
+    <div id="playsong"></div>
+    <ul id="list-artist"></ul>
+    <ul id="list-album"></ul>
+    <ul id="list-track"></ul>
+    <script src="vendor/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="scripts/spotify-api-1.0.0.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>
