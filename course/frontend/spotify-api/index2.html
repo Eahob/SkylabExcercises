@@ -5,54 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>🎼</title>
-    <link rel="stylesheet" href="vendor/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="vendor/bootstrap/4.0.0/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="styles/main.css">
     <style>
-        #test {
-            background-color: black;
-            display: block;
-            width: 300px;
-            height: 300px;
+        header {
+            height: 70px;
         }
-    </style>
-    <style>
+        li {
+            list-style: none;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .active {
+            background-color: #CCC;
+        }
+        a {
+            float: right;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+        a:hover {
+            cursor: pointer;
+        }
+
+        main {
+            position: relative;
+        }
+
+        main div {
+            position: absolute;
+            top: 0;
+        }
+
+        ul {
+            position: absolute;
+            padding: 0;
+            width: 30vw;
+        }
+
+        #list-album ul {
+            left: 30vw;
+        }
+
+        #list-track ul {
+            left: 60vw;
+        }
     </style>
 </head>
 
 <body>
-    <div id="test">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    1111111111
-                </div>
-                <div class="carousel-item">
-                    22222222222
-                </div>
-                <div class="carousel-item">
-                    33333333333333
+    <header>
+        <form>
+            <input id="searchinput" type="text" placeholder="Search an artist">
+        </form>
+        <div id="playsong">
+            <audio id="songplayer" controls><source src="" type="audio/mpeg"></audio>
+        </div>
+    </header>
+
+    <main>
+        <div id="list-artist">
+            <ul></ul>
+            <div id="list-album">
+                <ul></ul>
+                <div id="list-track">
+                    <ul></ul>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-    </div>
+    </main>
     <script src="vendor/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <!--
     <script src="vendor/popper/1.12.9/popper.min.js"></script>
-    <script src="vendor/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="scripts/spotify-api-1.0.0.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="vendor/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+    <script src="scripts/spotify-api-1.0.1.js"></script>
+    <script src="scripts/main3.js"></script>
 </body>
 
 </html>

@@ -10,7 +10,7 @@ Example:
 'use strict'
 function programQDNP(value) {
     value = parseInt(value.replace('$', '') * 100); // Pasamos de dolares a centavos
-    if (!value) { return 'invalid input' }
+    if (!value or value > -1) { return 'invalid input' }
     var numberOfCoins;
     var solution = '';
     var coin = [
@@ -27,7 +27,7 @@ function programQDNP(value) {
             solution += numberOfCoins + ' ' + (coin[i][numberOfCoins] || coin[i].plural) + ', ';
         }
     }
-    return solution.slice(0, -2);;
+    return solution.slice(0, -2);
 }
 
 var programQDNP_ES6 = value => {
