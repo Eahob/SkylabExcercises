@@ -30,12 +30,11 @@ class TaskApp extends React.Component {
     // UNCOMPRESSED version ,)
     removeTask = index => {
         this.setState(prevState => {
-            let aTask = this.state.tasks[index];
             return {
                 tasks: prevState.tasks.filter((task, _index) => {
                     return index !== _index
                 }),
-                tasksDone:[...prevState.tasksDone, aTask]
+                tasksDone:[...prevState.tasksDone, prevState.tasks[index]]
             }
         })
     }

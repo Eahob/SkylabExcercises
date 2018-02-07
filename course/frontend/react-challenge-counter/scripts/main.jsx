@@ -36,6 +36,5 @@ function IncrementCounter(props) {
     return <button onClick={props.onIncrement}>More</button>
 }
 
-
 ReactDOM.render(<CountApp />,
     document.getElementById('main'))
