@@ -2,23 +2,23 @@ const http = require('http')
 const url = require('url')
 
 const server = http.createServer(function (req, res) {
-    // request handling logic...
-    let result = {}
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    let parsedUrl = url.parse(req.url, true)
-    let date = new Date(parsedUrl.query.iso)
-    if (parsedUrl.pathname.indexOf('parsetime') > -1) {
-        result = {
-            hour: date.getHours(),
-            minute: date.getMinutes(),
-            second: date.getSeconds()
-        }
-    } else {
-        result = {
-            unixtime: date.getTime() 
-        }
+  // request handling logic...
+  let result = {}
+  res.writeHead(200, { 'Content-Type': 'application/json' })
+  let parsedUrl = url.parse(req.url, true)
+  let date = new Date(parsedUrl.query.iso)
+  if (parsedUrl.pathname === '/api/parsetime') {
+    result = {
+      hour: date.getHours(),
+      minute: date.getMinutes(),
+      second: date.getSeconds()
     }
-    res.end(JSON.stringify(result))
+  } else if (parsedUrl.pathname === '/api/unixtime') {
+    result = {
+      unixtime: date.getTime()
+    }
+  }
+  res.end(JSON.stringify(result))
 })
 server.listen(process.argv[2])
 
