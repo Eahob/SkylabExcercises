@@ -1,0 +1,11 @@
+extends base.pug
+
+block content
+  form(action="/", method="post")
+   input(type="text", name="text")
+   input(type="submit")
+  #todo
+    h1 To Do
+    ul
+    each element in listToDo
+     li #{element.text}

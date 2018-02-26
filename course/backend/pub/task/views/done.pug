@@ -1,0 +1,8 @@
+extends base.pug
+
+block content
+  #done
+   h1 Done
+   ul
+   each element in listDone
+    li #{element.text}

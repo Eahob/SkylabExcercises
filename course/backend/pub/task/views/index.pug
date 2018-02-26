@@ -1,0 +1,19 @@
+//- template.pug
+extends base.pug
+
+block content
+    form(action="/tasks", method="post")
+        input(type="text", name="text")
+        input(type="submit", value="Add Task")
+    if listToDo.length
+        #todo
+            h1 To Do
+            ul
+                each element in listToDo
+                    li #{element.text}
+    if listDone.length
+        #done
+            h1 Done
+            ul
+                each element in listDone
+                    li #{element.text}
