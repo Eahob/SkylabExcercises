@@ -2,7 +2,7 @@
 extends base.pug
 
 block content
-    form(action="/tasks", method="post")
+    form(action="/", method="post")
         input(type="text", name="text")
         input(type="submit", value="Add Task")
     if listToDo.length
