@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        title User Rigistration
+    body
+        form(action="/register", method="post")
+            input(type="text", name="name",placeholder="Enter your name")
+            input(type="text", name="surname",placeholder="Enter your surname")
+            input(type="text", name="email",placeholder="Enter your email")
+            input(type="text", name="username",placeholder="Enter your username")
+            input(type="password", name="password",placeholder="Enter a password")
+            input(type="submit", value="Register")
+        if userList.length
+            h1 User List
+            ul
+                each element in userList
+                    li 
+                        form(action="/update", method="post")
+                            input(type="hidden", name="id",value=element.id)
+                            input(type="text", name="name",value=element.name)
+                            input(type="text", name="surname",value=element.surname)
+                            input(type="text", name="email",value=element.email)
+                            input(type="text", name="username",value=element.username)
+                            input(type="password", name="password",value=element.password)
+                            input(type="submit", value="Change") 
+                            a(href="/delete/"+element.id) ✘ Delete User
+        else
+            h1 No users in database
