@@ -1,3 +1,5 @@
+const querystring = require('querystring')
+
 require('dotenv').config()
 
 const express = require('express')
@@ -8,6 +10,9 @@ const { MongoClient, ObjectId } = require('mongodb')
 const formBodyParser = bodyParser.urlencoded({ extended: false })
 
 const app = express()
+
+let queryUrl = ''
+
 app.use(express.static('public'))
 app.set('view engine', 'pug')
 
@@ -15,22 +20,24 @@ MongoClient.connect('mongodb://localhost:27017/', (err, conn) => {
     if (err) throw err
     const db = conn.db('bootcamp')
 
-    /*
     app.get('/', (req, res) => {
-        res.render('form')
-    })
-    */
-    app.get('/', (req, res) => {
-        db.collection('test').find().toArray((err, data) => {
+        const { name, surname, email, username, edit } = req.query
+        let filterObject = {}
+        if (name) filterObject.name = name
+        if (surname) filterObject.surname = surname
+        if (email) filterObject.email = email
+        if (username) filterObject.username = username
+        queryUrl = querystring.stringify(filterObject)
+        db.collection('test').find(filterObject).toArray((err, data) => {
             if (err) throw err
             let userList = data.map(element => {
-                let { name, surname, email, username,password } = element
-                let id = element._id
-                return { name, surname, email, username, password, id }
+                element.edit = element._id == edit
+                return element
             })
-            res.render('index', { userList })
+            res.render('index', { userList, queryUrl})
         })
     })
+
     app.get('/delete/:id', (req, res) => {
         const id = req.params.id
         db.collection('test').remove({ _id: ObjectId(id) })
@@ -39,14 +46,39 @@ MongoClient.connect('mongodb://localhost:27017/', (err, conn) => {
 
     app.post('/register', formBodyParser, (req, res) => {
         const { name, surname, email, username, password } = req.body
-        db.collection('test').insert({ name, surname, email, username, password })
-            .then(res.redirect('/'))
 
+        if (name && surname && email && username && password ) {
+            db.collection('test').find({$or:[{username},{email}]}).toArray((err, data) => {
+                if (data.length) {
+                    let message = 'Username or email already registered'
+                    res.render('error',{ message})
+                } else {
+                    db.collection('test').insert({ name, surname, email, username, password })
+                    .then(res.redirect('/'))
+                }
+            })
+        } else {
+            // invalid registration
+            let message = 'Missing fields:'+ (username ? '' :' username ') + (name ? '' : ' name ') + (surname ? '' : ' surname ') + (email ? '' : ' email ') + (password ? '' : ' password ')
+            res.render('error',{ message})
+        }
     })
     app.post('/update', formBodyParser, (req, res) => {
-        const { name, surname, email, username, password, id } = req.body
-        db.collection('test').updateOne({ _id: ObjectId(id) }, { $set: { name, surname, email, username, password } })
-        res.redirect('/')
+        const { id, name, surname, email, username, curentPassword, newPassword } = req.body
+
+        db.collection('test').find({ _id: ObjectId(id) }).toArray((err, data) => {
+            if (curentPassword === data[0].password) {
+                let setObject = { name, surname, email, username }
+                if (newPassword) {
+                    setObject.password = newPassword
+                }
+                db.collection('test').updateOne({ _id: ObjectId(id) }, { $set: setObject })
+                res.redirect('/')
+            } else {
+                let message = 'Invalid password'
+                res.render('error',{ message})
+            }
+        })
     })
 
     const port = process.env.PORT

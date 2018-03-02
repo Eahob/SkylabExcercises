@@ -3,26 +3,68 @@ html
     head
         title User Rigistration
     body
+        h1 User Management
+        h2 Register New User
         form(action="/register", method="post")
+            input(type="text", name="username",placeholder="Enter a username")
             input(type="text", name="name",placeholder="Enter your name")
             input(type="text", name="surname",placeholder="Enter your surname")
             input(type="text", name="email",placeholder="Enter your email")
-            input(type="text", name="username",placeholder="Enter your username")
             input(type="password", name="password",placeholder="Enter a password")
             input(type="submit", value="Register")
         if userList.length
-            h1 User List
-            ul
+            h2 User List
+            h3 Filter
+            table
+                tr
+                    form(action="/", method="get")
+                        td
+                            input(type="text", name="username",placeholder="Filter by username")
+                        td
+                            input(type="text", name="name",placeholder="Filter by name")
+                        td
+                            input(type="text", name="surname",placeholder="Filter by surname")
+                        td
+                            input(type="text", name="email",placeholder="Filter by email")
+                        td
+                            input(type="submit", value="Filter")
+            table
+                tr
+                    th User Name
+                    th Name
+                    th Surname
+                    th Email
+                    th(colspan="5")
                 each element in userList
-                    li 
-                        form(action="/update", method="post")
-                            input(type="hidden", name="id",value=element.id)
-                            input(type="text", name="name",value=element.name)
-                            input(type="text", name="surname",value=element.surname)
-                            input(type="text", name="email",value=element.email)
-                            input(type="text", name="username",value=element.username)
-                            input(type="password", name="password",value=element.password)
-                            input(type="submit", value="Change") 
-                            a(href="/delete/"+element.id) ✘ Delete User
+                    tr
+                        if element.edit
+                            form(action="/update", method="post")
+                                input(type="hidden", name="id",value=element._id)
+                                td
+                                    input(type="text", name="username",placeholder="Username",value=element.username)
+                                td
+                                    input(type="text", name="name",placeholder="Name",value=element.name)
+                                td
+                                    input(type="text", name="surname",placeholder="Surname",value=element.surname)
+                                td
+                                    input(type="text", name="email",placeholder="email",value=element.email)
+                                td
+                                    input(type="password", name="curentPassword",placeholder="Curent password")
+                                td
+                                    input(type="password", name="newPassword",placeholder="New password")
+                                td
+                                    input(type="submit", value="Change")
+                                td
+                                    a(href="/"+ (queryUrl ? '?'+queryUrl:'')) Close
+                                td
+                                    a(href="/delete/"+element._id) ✘ Delete User
+                        else
+                            td #{element.username}
+                            td #{element.name}
+                            td #{element.surname}
+                            td #{element.email}
+                            td(colspan="5")
+                                a(href="/?edit="+element._id+(queryUrl ? '&'+queryUrl:''))
+                                    button Edit
         else
-            h1 No users in database
+            h2 No users in database
