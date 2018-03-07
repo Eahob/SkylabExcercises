@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-//const { MongoClient } = require('mongodb')
 const mongoose = require('mongoose')
 const uuid = require('uuid/v4')
 const { success, fail } = require('./api-utils')
