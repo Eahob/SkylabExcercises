@@ -7,17 +7,6 @@ api.host = 'localhost'
 api.port = '5000'
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      users: []
-    }
-  }
-  /*
-  componentDidMount() {
-    api.list().then(res => this.setState({ users: res }))
-  }
-  */
   render() {
     return (
       <BrowserRouter>
@@ -66,9 +55,9 @@ class Register extends Component {
     this.setState({ [property]: input.trim() })
   }
   submit() {
-    this.setState({ showAlert: true })
     const { name, surname, email, username, password } = this.state
     api.register(name, surname, email, username, password).then(response => {
+      this.setState({ showAlert: true })
       if (response.status === 'OK') {
         this.setState({
           name: '',
@@ -134,6 +123,14 @@ class UsersList extends Component {
       }
     }
   }
+  removeUserFromList = (id) => {
+    let index = this.state.users.findIndex(user => user.id === id)
+    this.setState(prevState => {
+      let users = prevState.users
+      users.splice(index, 1)
+      return {users}
+    })
+  }
   componentDidMount() {
     api.list().then(res => this.setState({ users: res.data, responseStatus: res.status }))
   }
@@ -162,7 +159,7 @@ class UsersList extends Component {
             </div>
           </div>
         </form>
-        <Modal info={this.state.modalInfo} />
+        <Modal info={this.state.modalInfo} removeUser={this.removeUserFromList} />
         <div className="table-responsive">
           <table className="text-center table table-striped table-sm table-bordered table-hover">
             <thead>
@@ -218,6 +215,7 @@ class Modal extends Component {
       this.setState({ showAlert: true })
       if (res.status === 'OK') {
         this.setState({ succes: true })
+        this.props.removeUser(this.props.info.id)
       } else {
         this.setState({ error: res.error })
       }
